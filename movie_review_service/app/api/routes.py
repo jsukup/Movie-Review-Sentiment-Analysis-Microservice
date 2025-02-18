@@ -3,10 +3,12 @@ from pydantic import BaseModel
 from typing import List
 from datetime import datetime
 from app.services.review_service import ReviewService
-from app.ml.sentiment import SentimentAnalyzer
+from app.ml.inference import SentimentAnalyzer
+from app.ml.sentiment import SentimentRequest, SentimentResponse
 
 
 router = APIRouter()
+analyzer = SentimentAnalyzer()
 
 
 class ReviewCreate(BaseModel):
@@ -62,7 +64,10 @@ async def delete_review(review_id: int):
     return {"message": "Review deleted successfully"}
 
 
-@router.post("/analyze")
-async def analyze_sentiment(text: str):
-    sentiment = SentimentAnalyzer.analyze(text)
-    return {"sentiment": sentiment}
+@router.post("/analyze", response_model=SentimentResponse)
+async def analyze_sentiment(request: SentimentRequest):
+    try:
+        result = await analyzer.predict(request.text)
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

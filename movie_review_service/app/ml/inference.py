@@ -1,5 +1,6 @@
 import json
 import os
+import torch
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 
@@ -9,6 +10,7 @@ class SentimentAnalyzer:
         self.tokenizer = None
         self.config = self._load_config()
         self.labels = ["negative", "positive"]
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     def _load_config(self):
         config_path = os.path.join(
@@ -24,6 +26,7 @@ class SentimentAnalyzer:
                 self.config["model_id"]
             )
             self.tokenizer = AutoTokenizer.from_pretrained(self.config["model_type"])
+            self.model.to(self.device)
             self.model.eval()  # Set to evaluation mode
             print("Model loaded successfully")
 
@@ -33,10 +36,14 @@ class SentimentAnalyzer:
 
         # Tokenize and predict
         inputs = self.tokenizer(
-            text, return_tensors="pt", truncation=True, max_length=512
+            text, return_tensors="pt", truncation=True, max_length=512, padding=True
         )
-        outputs = self.model(**inputs)
-        probabilities = outputs.logits.softmax(dim=1)
+        # Move inputs to the same device as model
+        inputs = {k: v.to(self.device) for k, v in inputs.items()}
+
+        with torch.no_grad():
+            outputs = self.model(**inputs)
+            probabilities = outputs.logits.softmax(dim=1)
 
         # Get prediction
         prediction = probabilities.argmax().item()

@@ -2,15 +2,18 @@ version: '3.8'
 
 services:
   api:
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
     volumes:
-      - ./app:/app/app
+      - .:/app  # Mount the entire project directory
     depends_on:
       - db
     environment:
       - DATABASE_URL=postgres://postgres:postgres@db:5432/movie_reviews
+    restart: unless-stopped  # Add restart policy
 
   db:
     image: registry.hub.docker.com/library/postgres:15.2
@@ -22,6 +25,7 @@ services:
       - POSTGRES_DB=movie_reviews
     ports:
       - "5432:5432"
+    restart: unless-stopped  # Add restart policy
 
 volumes:
   postgres_data: 

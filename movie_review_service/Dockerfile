@@ -8,12 +8,11 @@ RUN apt-get update && \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements and install Python packages
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Copy the entire project
+COPY . .
 
-# Copy application code
-COPY app/ ./app/
+# Install Python packages
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Command to run the application
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"] 
