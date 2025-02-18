@@ -187,3 +187,5 @@ app/ml/models/best_model/*.onnx
 ml/training/runs/
 ml/training/outputs/
 .cache/
+ml/models/best_model/model.safetensors
+movie_review_service/app/ml/models/best_model/model.safetensors
