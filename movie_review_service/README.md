@@ -61,5 +61,4 @@ The project uses:
 - `POSTGRES_DB`: Database name
 
 ## License
-
-MIT 
+(C) 2025, All rights reserved. John Sukup and Expected X, LLC.
