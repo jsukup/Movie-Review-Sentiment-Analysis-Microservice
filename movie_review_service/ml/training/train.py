@@ -276,7 +276,7 @@ def train_model(
     )
 
     # Save config locally
-    save_dir = "../../../app/ml/models/best_model"
+    save_dir = "../../app/ml/models/best_model"
     os.makedirs(save_dir, exist_ok=True)
 
     config = {"model_id": repo_name, "model_type": "distilbert-base-uncased"}
