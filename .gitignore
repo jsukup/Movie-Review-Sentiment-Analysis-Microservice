@@ -169,3 +169,8 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Pytorch model files
+app/ml/models/best_model/*.safetensors
+app/ml/models/best_model/*.bin
+app/ml/models/best_model/*.pt

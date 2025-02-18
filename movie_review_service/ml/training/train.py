@@ -8,9 +8,12 @@ from torch.utils.data import DataLoader
 from tqdm.auto import tqdm
 from dataset import IMDBDataset, prepare_data
 from pathlib import Path
+from huggingface_hub import HfApi
 import time
 import gc
 from sklearn.metrics import classification_report
+import os
+import json
 
 
 def evaluate_model(model, dataloader, device):
@@ -255,6 +258,33 @@ def train_model(
     total_time = time.time() - start_time
     print(f"\nTraining completed in {total_time:.2f} seconds")
     print(f"Best accuracy: {best_accuracy:.4f}")
+
+    print("Converting model to float16 to reduce size...")
+    model_fp16 = model.half()
+
+    # Save to Hugging Face Hub
+    model_name = "movie-review-sentiment-test"
+    api = HfApi()
+    username = api.whoami()["name"]
+    repo_name = f"{username}/{model_name}"
+    print(f"Pushing model to Hugging Face Hub: {repo_name}")
+
+    model_fp16.push_to_hub(
+        repo_name,
+        private=False,  # Ensure model is public
+        commit_message="Add sentiment analysis model",
+    )
+
+    # Save config locally
+    save_dir = "../../../app/ml/models/best_model"
+    os.makedirs(save_dir, exist_ok=True)
+
+    config = {"model_id": repo_name, "model_type": "distilbert-base-uncased"}
+
+    with open(os.path.join(save_dir, "model_config.json"), "w") as f:
+        json.dump(config, f)
+
+    print(f"Model pushed to Hugging Face Hub and config saved locally")
 
 
 if __name__ == "__main__":
