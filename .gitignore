@@ -174,3 +174,16 @@ cython_debug/
 app/ml/models/best_model/*.safetensors
 app/ml/models/best_model/*.bin
 app/ml/models/best_model/*.pt
+app/ml/models/best_model/pytorch_model.*
+app/ml/models/best_model/*.h5
+app/ml/models/best_model/*.onnx
+**/__pycache__/
+*.pyc
+
+# Keep the config file
+!app/ml/models/best_model/model_config.json
+
+# Training artifacts
+ml/training/runs/
+ml/training/outputs/
+.cache/
