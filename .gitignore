@@ -188,3 +188,7 @@ movie_review_service/app/ml/models/best_model/model_config.json
 movie_review_service/app/ml/models/best_model/special_tokens_map.json
 movie_review_service/app/ml/models/best_model/tokenizer_config.json
 movie_review_service/app/ml/models/best_model/vocab.txt
+
+# Aerich migrations
+migrations/*
+!migrations/.gitkeep
