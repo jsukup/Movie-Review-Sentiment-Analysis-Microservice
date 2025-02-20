@@ -62,24 +62,22 @@ The fine-tuned model will be saved and can be used by the movie review service f
 ## Quick Start
 
 1. Clone the repository
-2. Copy the example environment file:
-```bash
-cp .env.example .env
-```
+2. Start the services:
 
-3. Start the services:
 ```bash
 docker-compose up --build
 ```
 
-4. Initialize the database (in a new terminal):
+3. Initialize the database (in a new terminal):
+
 ```bash
 docker-compose exec api aerich init -t app.db.TORTOISE_ORM
 docker-compose exec api aerich init-db
 ```
 
-5. Access the API:
-- API endpoints: http://localhost:8000
-- Swagger documentation: http://localhost:8000/docs
+4. Access the API:
+
+- API endpoints: <http://localhost:8000>
+- Swagger documentation: <http://localhost:8000/docs>
 
 For detailed setup instructions and troubleshooting, see [movie_review_service/README.md](movie_review_service/README.md)

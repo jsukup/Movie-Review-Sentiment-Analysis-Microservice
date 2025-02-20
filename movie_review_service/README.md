@@ -2,6 +2,10 @@
 
 A microservice for managing movie reviews with sentiment analysis capabilities.
 
+## License
+
+**(C) 2025, All rights reserved. John Sukup and Expected X, LLC. This project is the privately owned property of John Sukup and Expected X, LLC. and cannot be reproduced, distributed, or used without the express written permission of John Sukup and Expected X, LLC.**
+
 ## Features
 
 - CRUD operations for movie reviews
@@ -62,16 +66,7 @@ A microservice for managing movie reviews with sentiment analysis capabilities.
 
 1. Clone the repository
 2. Install Docker and Docker Compose
-3. Create a `.env` file in the root directory with:
-```
-DATABASE_URL=postgres://postgres:postgres@db:5432/movie_reviews
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=postgres
-POSTGRES_DB=movie_reviews
-MODEL_PATH=/app/ml/models/sentiment_model
-```
-
-4. Run the following commands:
+3. Run the following commands:
 
 ```bash
 # Build and start the containers
@@ -90,6 +85,7 @@ docker-compose exec api aerich init-db
 ### Troubleshooting
 
 If you encounter any issues:
+
 - Ensure all containers are running: `docker-compose ps`
 - Check container logs: `docker-compose logs api` or `docker-compose logs db`
 - Verify the database connection: `docker-compose exec db psql -U postgres -d movie_reviews`
@@ -124,6 +120,4 @@ The project uses:
 - `POSTGRES_PASSWORD`: Database password
 - `POSTGRES_DB`: Database name
 
-## License
 
-(C) 2025, All rights reserved. John Sukup and Expected X, LLC.
