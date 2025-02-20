@@ -13,7 +13,8 @@ A microservice for managing movie reviews with sentiment analysis capabilities.
 ## Technical Implementation
 
 ### 1. Code Quality & Project Structure
-```
+
+'''
 /movie_review_service
     /app
         /api         - API routes and endpoints
@@ -25,27 +26,32 @@ A microservice for managing movie reviews with sentiment analysis capabilities.
     /ml
         /training   - Model training scripts
     /tests          - Test files
-```
+'''
 
 ### 2. ORM & Database Management
+
 - **ORM**: Tortoise ORM for async database operations (**SCALABILITY!**)
 - **Migrations**: Aerich for version-controlled database schema changes (not implemented yet)
 - **Models**: Defined in `app/models` with proper relationships and validation
 
 ### 3. CRUD Operations
+
 - `POST /api/reviews` - Create new review
 - `GET /api/reviews/{movie_id}` - Retrieve reviews by movie
 - `PUT /api/reviews/{review_id}` - Update existing review
 - `DELETE /api/reviews/{review_id}` - Delete review
 
 ### 4. Sentiment Analysis Implementation
+
 #### Endpoint
+
 - `POST /api/analyze` - Analyzes review sentiment
 - Implements model caching for improved performance
 - Async implementation for better scalability
 - Error handling for robustness
 
 #### Model Architecture
+
 - Base: DistilBERT (lightweight BERT variant)
 - Fine-tuned on IMDB Dataset (from Kaggle)
 - Binary classification (positive/negative sentiment)
@@ -71,7 +77,9 @@ docker-compose exec api aerich init-db
 ```
 
 ### Database Migrations
+
 For future schema changes:
+
 ```bash
 # Create a new migration
 docker-compose exec api aerich migrate --name <migration_name>
@@ -83,6 +91,7 @@ docker-compose exec api aerich upgrade
 ## Development
 
 The project uses:
+
 - Python 3.10.12
 - FastAPI with async endpoints
 - Tortoise ORM + Aerich migrations
@@ -98,4 +107,5 @@ The project uses:
 - `POSTGRES_DB`: Database name
 
 ## License
+
 (C) 2025, All rights reserved. John Sukup and Expected X, LLC.

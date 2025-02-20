@@ -6,7 +6,7 @@ from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 class SentimentAnalyzer:
     # Class constant for easy adjustment of 'neutral' threshold
-    CONFIDENCE_THRESHOLD = 0.50
+    CONFIDENCE_THRESHOLD = 0.60
 
     def __init__(self):
         self.model = None
