@@ -1,4 +1,11 @@
 from pydantic import BaseModel
+from enum import Enum
+
+
+class SentimentEnum(str, Enum):
+    POSITIVE = "positive"
+    NEGATIVE = "negative"
+    NEUTRAL = "neutral"
 
 
 class SentimentRequest(BaseModel):
@@ -6,5 +13,5 @@ class SentimentRequest(BaseModel):
 
 
 class SentimentResponse(BaseModel):
-    sentiment: str
+    sentiment: SentimentEnum
     confidence: float

@@ -1,6 +1,7 @@
 import torch
 
 
+# Simple test to check if GPU is available that can be run independently before running train.py
 def test_gpu():
     print(f"PyTorch version: {torch.__version__}")
     print(f"CUDA version: {torch.version.cuda}")

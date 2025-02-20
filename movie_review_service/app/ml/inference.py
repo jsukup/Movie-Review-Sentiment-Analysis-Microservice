@@ -5,6 +5,9 @@ from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 
 class SentimentAnalyzer:
+    # Class constant for easy adjustment of 'neutral' threshold
+    CONFIDENCE_THRESHOLD = 0.50
+
     def __init__(self):
         self.model = None
         self.tokenizer = None
@@ -45,11 +48,17 @@ class SentimentAnalyzer:
             outputs = self.model(**inputs)
             probabilities = outputs.logits.softmax(dim=1)
 
-        # Get prediction
-        prediction = probabilities.argmax().item()
+        # Get prediction and confidence
         confidence = probabilities.max().item()
 
+        # Use class constant for threshold
+        if confidence < self.CONFIDENCE_THRESHOLD:
+            sentiment = "neutral"
+        else:
+            prediction = probabilities.argmax().item()
+            sentiment = self.labels[prediction]
+
         return {
-            "sentiment": self.labels[prediction],
+            "sentiment": sentiment,
             "confidence": float(confidence),
         }
