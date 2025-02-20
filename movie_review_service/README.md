@@ -6,14 +6,6 @@ A microservice for managing movie reviews with sentiment analysis capabilities.
 
 **(C) 2025, All rights reserved. John Sukup and Expected X, LLC. This project is the privately owned property of John Sukup and Expected X, LLC. and cannot be reproduced, distributed, or used without the express written permission of John Sukup and Expected X, LLC.**
 
-## Features
-
-- CRUD operations for movie reviews
-- Sentiment analysis using fine-tuned DistilBERT model
-- PostgreSQL database with Tortoise ORM and Aerich migrations
-- FastAPI-based REST API
-- Docker containerization
-
 ## Technical Implementation
 
 ### 1. Code Quality & Project Structure
@@ -112,12 +104,5 @@ The project uses:
 - PostgreSQL
 - HuggingFace Transformers
 - Docker
-
-## Environment Variables
-
-- `DATABASE_URL`: PostgreSQL connection string
-- `POSTGRES_USER`: Database user
-- `POSTGRES_PASSWORD`: Database password
-- `POSTGRES_DB`: Database name
 
 
