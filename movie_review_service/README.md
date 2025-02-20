@@ -62,19 +62,37 @@ A microservice for managing movie reviews with sentiment analysis capabilities.
 
 1. Clone the repository
 2. Install Docker and Docker Compose
-3. Run the following commands:
+3. Create a `.env` file in the root directory with:
+```
+DATABASE_URL=postgres://postgres:postgres@db:5432/movie_reviews
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+POSTGRES_DB=movie_reviews
+MODEL_PATH=/app/ml/models/sentiment_model
+```
+
+4. Run the following commands:
 
 ```bash
 # Build and start the containers
 docker-compose up --build
 
+# Wait for the services to be fully up, then in a new terminal:
+
 # Initialize database migrations
-docker-compose exec api aerich init -t app.main.TORTOISE_ORM
+docker-compose exec api aerich init -t app.db.TORTOISE_ORM
 docker-compose exec api aerich init-db
 
 # The API will be available at http://localhost:8000
 # API documentation at http://localhost:8000/docs
 ```
+
+### Troubleshooting
+
+If you encounter any issues:
+- Ensure all containers are running: `docker-compose ps`
+- Check container logs: `docker-compose logs api` or `docker-compose logs db`
+- Verify the database connection: `docker-compose exec db psql -U postgres -d movie_reviews`
 
 ### Database Migrations
 
