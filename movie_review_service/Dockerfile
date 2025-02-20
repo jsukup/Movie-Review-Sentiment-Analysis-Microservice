@@ -6,6 +6,7 @@ WORKDIR /app
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     build-essential \
+    postgresql-client \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy the entire project
@@ -14,5 +15,8 @@ COPY . .
 # Install Python packages
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Command to run the application
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"] 
+# Make startup script executable
+RUN chmod +x start.sh
+
+# Use startup script instead of direct uvicorn command
+CMD ["/app/start.sh"] 
