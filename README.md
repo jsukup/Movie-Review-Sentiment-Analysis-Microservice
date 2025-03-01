@@ -2,10 +2,6 @@
 
 A FastAPI-based microservice that provides movie review management with sentiment analysis capabilities.
 
-## License
-
-**(C) 2025, All rights reserved. John Sukup and Expected X, LLC. This project is the privately owned property of John Sukup and Expected X, LLC. and cannot be reproduced, distributed, or used without the express written permission of John Sukup and Expected X, LLC.**
-
 ## Key Features
 
 - **Clean Architecture**: Organized in layers (API, Services, Models) for maintainability
