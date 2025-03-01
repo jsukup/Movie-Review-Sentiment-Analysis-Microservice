@@ -1,4 +1,4 @@
-# Movie Review Service
+# Movie Review Sentiment Analysis Microservice
 
 A FastAPI-based microservice that provides movie review management with sentiment analysis capabilities.
 
